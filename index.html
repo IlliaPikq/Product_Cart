@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Countdown</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="buy_product">
+        <div class="assest_container">
+            <div class="img_selected_container">
+                <img src="assets/v-a-tao-OxvlDO8RwKg-unsplash.jpg" alt="photo">
+            </div>
+            <div class="img_container">
+                <img src="assets/v-a-tao-OxvlDO8RwKg-unsplash.jpg" alt="photo" class="imgSelected">
+                <img src="assets/alexander-andrews-Wzs4-QEmCUQ-unsplash.jpg" alt="photo">
+                <img src="assets/brad-pouncey-0KaTrsWvoJE-unsplash.jpg" alt="photo">
+            </div>
+        </div>
+        <section class="product">
+            <div class="container_text">
+                <h1 class="cart_title">iPhone 14 Pro 128 GB</h1>
+                <h2 class="cart_subTitle"><s>$3080.98 </s><span class="highligth_red"> - 50% OFF</span></h2>
+            </div>
+            <div class="countdown_wrapper">
+                <div class="count_block">
+                    <h3 class="days counter">00</h3>
+                    <h3>Days</h>
+                </div>
+                <div class="count_block">
+                    <h3 class="hours counter">00</h3>
+                    <h3>Hours</h>
+                </div>
+                <div class="count_block">
+                    <h3 class="mins counter">00</h3>
+                    <h3>Minutes</h>
+                </div>
+                <div class="count_block">
+                    <h3 class="secs counter">00</h3>
+                    <h3>Seconds</h>
+                </div>
+            </div>
+            <div class="container">
+                <p class=" product_price">Price: $1539.99</p>
+                <div class="actions">
+                    <button class="buyBtn btn">Buy Now </button>
+                    <button class="addBtn btn">Add <i class="fa-solid fa-cart-arrow-down"></i></button>
+                </div>
+            </div>
+            <div class="additional_info">
+                <span>Free shipping from $200 <i class="fa-solid fa-boxes-stacked"></i></span>
+                <span>Ship time: 5-6 days <i class="fa-solid fa-truck-fast"></i></span>
+                <span>14 days for return <i class="fa-solid fa-arrow-rotate-left"></i></span>
+            </div>
+            <a class="counter_cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart_counter">0</span>
+            </a>
+            <template>
+                <div class="popUp">Added New item</div>
+            </template>
+        </section>
+        <script>
+            // Offert Countdown
+            let futureTime = new Date(2023, 6, 5, 16, 5, 0).getTime();
+
+            function Countdown() {
+                const currentTime = new Date().getTime()
+                while (futureTime <= currentTime) futureTime += 604_800_000
+                let timeLeft = futureTime - currentTime
+
+                day_in_milis = 1000 * 60 * 60 * 24;
+                hour_in_milis = 1000 * 60 * 60
+                min_in_milis = 1000 * 60
+
+                let daysLeft = Math.floor(timeLeft / day_in_milis)
+                let hoursLeft = Math.floor(timeLeft % day_in_milis / hour_in_milis)
+                let minsLeft = Math.floor(timeLeft % hour_in_milis / min_in_milis)
+                let secsLeft = Math.floor(timeLeft % min_in_milis / 1000)
+
+                const [days, hours, mins, secs] = document.querySelectorAll('.counter')
+                days.textContent = daysLeft
+                hours.textContent = hoursLeft
+                mins.textContent = minsLeft
+                secs.textContent = secsLeft
+                console.log(daysLeft, hoursLeft, minsLeft, secsLeft);
+            }
+            setInterval(Countdown, 1000)
+
+            // Images Interactions
+            const imgs = document.querySelectorAll('.assest_container img')
+            imgs.forEach(img => {
+                img.addEventListener('click', e => {
+                    e.preventDefault()
+
+                    if (img.classList.contains('imgSelected')) return
+                    imgs.forEach(img => {
+                        img.classList.remove("imgSelected")
+                    })
+                    const activeImg = document.querySelector('.img_selected_container img')
+                    img.classList.add('imgSelected')
+                    const selectedImgPath = img.src
+                    activeImg.src = selectedImgPath
+                })
+            })
+
+            // Add to cart action
+            let counter = parseInt(sessionStorage.getItem("count")) || 0
+            const addCartBtn = document.querySelector('.addBtn');
+            const setCounter = (count) => {
+                counter = count
+                document.querySelector('.cart_counter').innerHTML = counter
+                sessionStorage.removeItem('count')
+                sessionStorage.setItem('count', count)
+            }
+            setCounter(counter)
+            addCartBtn.addEventListener('click', () => {
+                setCounter(counter + 1);
+
+                // displaying message
+                let temp = document.getElementsByTagName("template")[0];
+                let clon = temp.content.cloneNode(true);
+                document.body.appendChild(clon);
+            })
+
+
+        </script>
+</body>
+
+</html>
