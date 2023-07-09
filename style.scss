@@ -7,7 +7,16 @@ $fszBig: max(1.5rem, 3vw);
 	color: red;
 }
 
+.img_selected_container {
+	position: relative;
+	min-width: 500px;
+	min-height: 500px;
+}
+
 .loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
 	border: 4px solid rgba(0, 0, 0, 0.1);
 	border-left-color: transparent;
 	border-radius: 50%;
