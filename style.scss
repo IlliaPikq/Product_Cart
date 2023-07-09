@@ -17,27 +17,15 @@ $fszBig: max(1.5rem, 3vw);
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	border: 4px solid rgba(0, 0, 0, 0.1);
-	border-left-color: transparent;
+	width: 36px;
+	height: 36px;
 	border-radius: 50%;
-}
-
-.loader {
-	border: 4px solid rgba(0, 0, 0, 0.1);
+	border: 4px solid rgba(0, 0, 0);
 	border-left-color: transparent;
-	width: 36px;
-	height: 36px;
+	animation: spin 1s linear 10;
 }
 
-.loader {
-	border: 4px solid rgba(0, 0, 0, 0.1);
-	border-left-color: transparent;
-	width: 36px;
-	height: 36px;
-	animation: spin89345 1s linear infinite;
-}
-
-@keyframes spin89345 {
+@keyframes spin {
 	0% {
 		transform: rotate(0deg);
 	}
