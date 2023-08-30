@@ -11,9 +11,10 @@ gulp.task('convertAndMinify', async () => {
 });
 
 gulp.task('minifyImages', async () => {
-	return await gulp
+	return gulp
 		.src('./assets/*.{jpg,png,webp}')
 		.pipe(imagemin())
 		.pipe(gulp.dest('./dist'));
 }),
-	gulp.task('default', gulp.series('convertAndMinify', 'minifyImages'));
+
+gulp.task('default', gulp.series('convertAndMinify'));

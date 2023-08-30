@@ -5,33 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta description="Product Cart">
+    <meta name="description" content="Product Cart description">
     <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.rel='stylesheet'"/>
     <title>Countdown</title>
-    <style>
-    </style>
 </head>
-
 <body>
-    <div class="buy_product">
+    <main class="page">
         <div class="assest_container">
             <div class="img_selected_container">
                 <span class="loader"></span>
-                <img src="dist/img2.jpg" alt="photo">
+                <img src="/dist/img3.webp" alt="photo">
             </div>
             <div class="img_container">
-                <img src="dist/img2.jpg" alt="photo" class="imgSelected">
-                <img src="dist/img1.jpg" alt="photo">
-                <img src="dist/img3.jpg" alt="photo">
+                <img src="dist/img2.webp" alt="photo" class="imgSelected">
+                <img src="dist/img1.webp" alt="photo">
+                <img src="dist/img3.webp" alt="photo">
             </div>
         </div>
         <section class="product">
             <div class="container_text">
-                <h1 class="cart_title">iPhone 14 Pro 128 GB</h1>
-                <h2 class="cart_subTitle"><s>$3080.98 </s><span class="highligth_red"> - 50% OFF</span></h2>
+                <h1 class="cart_title">Iphone 14 Pro 128 GB</h1>
+                <h2 class="cart_subTitle"><s>$3080.98</s><span class="highligth_red"> - 50% OFF</span></h2>
             </div>
             <div class="countdown_wrapper">
                 <div class="count_block">
@@ -71,25 +66,28 @@
                 <div class="popUp">Added New item</div>
             </template>
         </section>
-        <script>
+    </main>
+    <script defer>
             // Offert Countdown
             let futureTime = new Date(2023, 6, 5, 16, 5, 0).getTime();
+
+            const day_in_ms = 1000 * 60 * 60 * 24;
+            const hour_in_ms = 1000 * 60 * 60
+            const min_in_ms = 1000 * 60
+
+            const [days, hours, mins, secs] = document.querySelectorAll('.counter')
 
             function Countdown() {
                 const currentTime = new Date().getTime()
                 while (futureTime <= currentTime) futureTime += 604_800_000
                 let timeLeft = futureTime - currentTime
 
-                day_in_milis = 1000 * 60 * 60 * 24;
-                hour_in_milis = 1000 * 60 * 60
-                min_in_milis = 1000 * 60
 
-                let daysLeft = Math.floor(timeLeft / day_in_milis)
-                let hoursLeft = Math.floor(timeLeft % day_in_milis / hour_in_milis)
-                let minsLeft = Math.floor(timeLeft % hour_in_milis / min_in_milis)
-                let secsLeft = Math.floor(timeLeft % min_in_milis / 1000)
+                let daysLeft = Math.floor(timeLeft / day_in_ms)
+                let hoursLeft = Math.floor(timeLeft % day_in_ms / hour_in_ms)
+                let minsLeft = Math.floor(timeLeft % hour_in_ms / min_in_ms)
+                let secsLeft = Math.floor(timeLeft % min_in_ms / 1000)
 
-                const [days, hours, mins, secs] = document.querySelectorAll('.counter')
                 days.textContent = daysLeft
                 hours.textContent = hoursLeft
                 mins.textContent = minsLeft
@@ -102,7 +100,6 @@
             imgs.forEach(img => {
                 img.addEventListener('click', e => {
                     e.preventDefault()
-
                     if (img.classList.contains('imgSelected')) return
                     imgs.forEach(img => {
                         img.classList.remove("imgSelected")
@@ -127,14 +124,12 @@
             addCartBtn.addEventListener('click', () => {
                 setCounter(counter + 1);
 
-                // displaying message
+                // Adding to cart message
                 let temp = document.getElementsByTagName("template")[0];
                 let clon = temp.content.cloneNode(true);
                 document.body.appendChild(clon);
             })
-
-
-        </script>
+    </script>
 </body>
 
 </html>
